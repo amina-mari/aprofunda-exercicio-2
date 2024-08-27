@@ -18,7 +18,7 @@ app.get('/post/:id', (req, res) => {
     foundedPost = posts.find(post => post.id === req.params.id)
 
     if(foundedPost) res.status(200).send(foundedPost);
-    else res.status(404).send({message: "Post não encontrado, verifique o id digitado"})
+    else res.status(404).send({message: "Post não encontrado na base de dados, verifique se o ID digitado está correto."})
 })
 
 app.post('/post', (req, res) => {
@@ -76,6 +76,7 @@ app.delete('/post/:id', (req, res) => {
     post = posts.find(post => post.id === req.params.id);
 
     if(post) {
-        posts = posts.filter(post => post.id !== req.params.id)      
+        posts = posts.filter(post => post.id !== req.params.id) 
+        res.status(200).send({message: "Post deletado com sucesso"});     
     } else res.status(404).send({message: "Post não encontrado na base de dados, verifique se o ID digitado está correto."})
 })
